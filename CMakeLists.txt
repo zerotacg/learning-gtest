@@ -34,5 +34,7 @@ target_link_libraries(
 )
 
 include(GoogleTest)
-gtest_discover_tests(hello-test)
+gtest_discover_tests(hello-test
+        EXTRA_ARGS --gtest_output=xml:reports/junit-hello-test.xml
+)
 

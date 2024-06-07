@@ -107,15 +107,16 @@ jobs:
           cmake --build ${{ needs.configure.outputs.build-output-dir }} --target all
 
       - name: Test
+        working-directory: ${{ needs.configure.outputs.build-output-dir }}
         run: |
-          ctest --extra-verbose --output-junit  "${{ needs.configure.outputs.build-output-dir }}/junit.xml"
+          ctest --extra-verbose
 
       - name: Test Report
         uses: dorny/test-reporter@v1
         if: success() || failure()
         with:
           name: GTests
-          path: "${{ needs.configure.outputs.build-output-dir }}/junit.xml"
+          path: "${{ needs.configure.outputs.build-output-dir }}/reports/junit-*.xml"
           reporter: java-junit
 
       - uses: actions/upload-artifact@v4
