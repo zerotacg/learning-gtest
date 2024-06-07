@@ -77,7 +77,7 @@ jobs:
 
       - name: Build
         run: |
-          VERBOSE=1 cmake --build ${{ needs.configure.outputs.build-output-dir }} --target ${{ matrix.target }}
+          cmake --build ${{ needs.configure.outputs.build-output-dir }} --target ${{ matrix.target }}
 
       - uses: actions/upload-artifact@v4
         with:
@@ -104,11 +104,11 @@ jobs:
 
       - name: Build
         run: |
-          VERBOSE=1 cmake --build ${{ needs.configure.outputs.build-output-dir }} --target all
+          cmake --build ${{ needs.configure.outputs.build-output-dir }} --target all
 
       - name: Test
         run: |
-          VERBOSE=1 ctest --output-junit  "${{ needs.configure.outputs.build-output-dir }}/junit.xml"
+          ctest --extra-verbose --output-junit  "${{ needs.configure.outputs.build-output-dir }}/junit.xml"
 
       - name: Test Report
         uses: dorny/test-reporter@v1
