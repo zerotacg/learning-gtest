@@ -11,6 +11,9 @@ on:
 env:
   project_name: learning-gtest
 
+permissions:
+  contents: write
+
 jobs:
   configure:
     runs-on: ubuntu-latest
