@@ -1,2 +1,2 @@
 # learning-gtest
- - [![CI/CD Pipeline](./actions/workflows/ci.yml/badge.svg)](./actions/workflows/ci.yml)
+ - [![CI/CD Pipeline](https://github.com/zerotacg/learning-gtest/actions/workflows/ci.yml/badge.svg)](https://github.com/zerotacg/learning-gtest/actions/workflows/ci.yml)
