@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <learning-gtest/hello.hpp>
+#include <learning-gtest/hello/hello.hpp>
 
 TEST(HelloTest, BasicAssertions) {
     EXPECT_STRNE("hello", "world");
