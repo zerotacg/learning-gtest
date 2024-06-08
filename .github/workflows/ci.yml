@@ -58,7 +58,8 @@ jobs:
       fail-fast: true
       matrix:
         target:
-          - learning-gtest
+          - hello
+          - world
     steps:
       - name: Dependencies
         run: >
@@ -114,7 +115,7 @@ jobs:
         if: success() || failure()
         with:
           name: test-results
-          path: "${{ needs.configure.outputs.build-output-dir }}/reports/junit-*.xml"
+          path: "${{ needs.configure.outputs.build-output-dir }}/**/reports/junit-*.xml"
 
   package:
     runs-on: ubuntu-latest

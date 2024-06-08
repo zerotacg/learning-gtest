@@ -46,6 +46,6 @@ target_link_libraries("${TEST_NAME}"
         "${project_namespace}::${COMPONENT_NAME}"
 )
 gtest_discover_tests("${TEST_NAME}"
-        EXTRA_ARGS "--gtest_output=xml:reports/junit-${TEST_NAME}.xml"
+        EXTRA_ARGS "--gtest_output=xml:${CMAKE_CURRENT_BINARY_DIR}/reports/junit-${TEST_NAME}.xml"
 )
 
