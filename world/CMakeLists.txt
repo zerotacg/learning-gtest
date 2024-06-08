@@ -4,7 +4,7 @@ list(APPEND package_components "${COMPONENT_NAME}")
 
 
 add_library(${COMPONENT_NAME}
-        learning-gtest/world/world.cpp
+        liblearning-gtest/world/world.cpp
 )
 add_library("${project_namespace}::${COMPONENT_NAME}" ALIAS ${COMPONENT_NAME})
 set_target_properties(${COMPONENT_NAME} PROPERTIES OUTPUT_NAME "${PROJECT_NAME}-${COMPONENT_NAME}")
@@ -26,7 +26,7 @@ install(TARGETS "${COMPONENT_NAME}"
 )
 
 install(FILES
-        learning-gtest/world/world.hpp
+        liblearning-gtest/world/world.hpp
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/${COMPONENT_NAME}
 )
 

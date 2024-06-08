@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <learning-gtest/world/world.hpp>
+#include <liblearning-gtest/world/world.hpp>
 
 TEST(WorldTest, BasicAssertions) {
     EXPECT_STRNE("hello", "world");
