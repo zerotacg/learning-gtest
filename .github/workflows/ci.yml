@@ -108,7 +108,7 @@ jobs:
       - name: Package
         run: |
           cpack --preset=default
-          tar --list --file ${{ needs.configure.outputs.build-output-dir }}/${{env.project_name}}-*.tar.gz
+          tar --list --file ${{ needs.configure.outputs.build-output-dir }}/default/${{env.project_name}}-*.tar.gz
 
       - uses: actions/upload-artifact@v4
         with:
