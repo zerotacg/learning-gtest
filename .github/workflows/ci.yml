@@ -82,6 +82,7 @@ jobs:
 
       - name: Test
         run: |
+          find "${{ needs.configure.outputs.build-output-dir }}"
           ctest --extra-verbose --preset=default
 
       - uses: actions/upload-artifact@v4
