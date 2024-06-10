@@ -18,11 +18,7 @@ jobs:
       build-output-dir: ${{ steps.strings.outputs.build-output-dir }}
       version: ${{ steps.strings.outputs.version }}
     steps:
-      - name: Dependencies
-        run: >
-          sudo apt update;
-          sudo apt install --yes
-          ninja-build
+      - uses: lukka/get-cmake@latest
 
       - uses: actions/checkout@v4
 
@@ -41,10 +37,8 @@ jobs:
 
       - name: Configure CMake
         run: >
-          cmake -B ${{ steps.strings.outputs.build-output-dir }}
+          cmake --preset=default
           -DCPACK_PACKAGE_VERSION="${{ steps.strings.outputs.version }}"
-          -S ${{ github.workspace }}
-          -G Ninja
 
       - uses: actions/upload-artifact@v4
         with:
@@ -54,62 +48,41 @@ jobs:
   libraries:
     runs-on: ubuntu-latest
     needs: [ configure ]
-    strategy:
-      fail-fast: true
-      matrix:
-        target:
-          - hello
-          - world
     steps:
-      - name: Dependencies
-        run: >
-          sudo apt update;
-          sudo apt install --yes
-          ninja-build
+      - uses: lukka/get-cmake@latest
 
       - uses: actions/checkout@v4
 
       - uses: actions/download-artifact@v4
         with:
-          pattern: configure-*
-          merge-multiple: true
+          pattern: configure-${{ steps.strings.outputs.version }}
           path: ${{ needs.configure.outputs.build-output-dir }}
 
       - name: Build
         run: |
-          cmake --build ${{ needs.configure.outputs.build-output-dir }} --target ${{ matrix.target }}
+          cmake --build --preset=default
 
       - uses: actions/upload-artifact@v4
         with:
-          name: libraries-${{ matrix.target }}-${{ needs.configure.outputs.version }}
+          name: libraries-${{ needs.configure.outputs.version }}
           path: ${{ needs.configure.outputs.build-output-dir }}
 
   tests:
     runs-on: ubuntu-latest
     needs: [ configure, libraries ]
     steps:
-      - name: Dependencies
-        run: >
-          sudo apt update;
-          sudo apt install --yes
-          ninja-build
+      - uses: lukka/get-cmake@latest
 
       - uses: actions/checkout@v4
 
       - uses: actions/download-artifact@v4
         with:
-          pattern: libraries-*
-          merge-multiple: true
+          name: libraries-${{ needs.configure.outputs.version }}
           path: ${{ needs.configure.outputs.build-output-dir }}
 
-      - name: Build
-        run: |
-          cmake --build ${{ needs.configure.outputs.build-output-dir }} --target all
-
       - name: Test
-        working-directory: ${{ needs.configure.outputs.build-output-dir }}
         run: |
-          ctest --extra-verbose
+          ctest --extra-verbose --preset=default
 
       - uses: actions/upload-artifact@v4
         if: success() || failure()
@@ -122,23 +95,18 @@ jobs:
     needs: [ configure, libraries ]
 
     steps:
-      - name: Dependencies
-        run: >
-          sudo apt update;
-          sudo apt install --yes
-          ninja-build
+      - uses: lukka/get-cmake@latest
 
       - uses: actions/checkout@v4
 
       - uses: actions/download-artifact@v4
         with:
-          pattern: libraries-*
-          merge-multiple: true
+          name: libraries-${{ needs.configure.outputs.version }}
           path: ${{ needs.configure.outputs.build-output-dir }}
 
       - name: Package
         run: |
-          cmake --build ${{ needs.configure.outputs.build-output-dir }} --target package
+          cpack --preset=default
           tar --list --file ${{ needs.configure.outputs.build-output-dir }}/${{env.project_name}}-*.tar.gz
 
       - uses: actions/upload-artifact@v4
@@ -156,8 +124,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
-          pattern: package-*
-          merge-multiple: true
+          name: package-${{ needs.configure.outputs.version }}
           path: ${{ needs.configure.outputs.build-output-dir }}
 
       - name: Release
