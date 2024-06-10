@@ -55,7 +55,7 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          name: configure-${{ steps.strings.outputs.version }}
+          name: configure-${{ needs.configure.outputs.version }}
           path: ${{ needs.configure.outputs.build-output-dir }}
 
       - name: Build
