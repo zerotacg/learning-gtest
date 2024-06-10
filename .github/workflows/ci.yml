@@ -82,7 +82,7 @@ jobs:
 
       - name: Test
         run: |
-          find "${{ needs.configure.outputs.build-output-dir }}"
+          cmake --build --preset=default
           ctest --extra-verbose --preset=default
 
       - uses: actions/upload-artifact@v4
@@ -107,6 +107,7 @@ jobs:
 
       - name: Package
         run: |
+          cmake --build --preset=default
           cpack --preset=default
           tar --list --file ${{ needs.configure.outputs.build-output-dir }}/${{env.project_name}}-*.tar.gz
 
