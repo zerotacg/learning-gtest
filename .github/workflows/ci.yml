@@ -45,7 +45,7 @@ jobs:
           name: configure-${{ steps.strings.outputs.version }}
           path: ${{ steps.strings.outputs.build-output-dir }}
 
-  libraries:
+  build:
     runs-on: ubuntu-latest
     needs: [ configure ]
     steps:
@@ -69,7 +69,7 @@ jobs:
 
   tests:
     runs-on: ubuntu-latest
-    needs: [ configure, libraries ]
+    needs: [ configure, build ]
     steps:
       - uses: lukka/get-cmake@latest
 
@@ -107,7 +107,6 @@ jobs:
 
       - name: Package
         run: |
-          cmake --build --preset=default
           cpack --preset=default
           tar --list --file ${{ needs.configure.outputs.build-output-dir }}/${{env.project_name}}-*.tar.gz
 

@@ -18,7 +18,8 @@
   "buildPresets": [
     {
       "name": "default",
-      "configurePreset": "default"
+      "configurePreset": "default",
+      "configuration": "Release"
     },
     {
       "hidden": true,
@@ -41,6 +42,7 @@
     {
       "name": "default",
       "configurePreset": "default",
+      "configuration": "Release",
       "output": {"outputOnFailure": true},
       "execution": {"noTestsAction": "error", "stopOnFailure": true}
     }
@@ -49,6 +51,7 @@
     {
       "name": "default",
       "configurePreset": "default",
+      "configurations": ["Release"],
       "generators": [
         "TGZ",
         "STGZ"
