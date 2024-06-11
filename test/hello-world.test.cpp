@@ -8,3 +8,7 @@ TEST(HelloWorldTest, BasicAssertions) {
     World world;
     EXPECT_EQ(hello.getEverything(), world.getEverything());
 }
+
+TEST(HelloWorldTest, SecondTestCase) {
+    EXPECT_STRNE("hello", "world");
+}
