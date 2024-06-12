@@ -35,11 +35,9 @@ install(EXPORT "${targets_export_name}"
 
 set(TEST_NAME "${COMPONENT_NAME}-test")
 
-add_executable("${TEST_NAME}"
+add_test_executable("${TEST_NAME}"
         test/world.test.cpp
 )
 target_link_libraries("${TEST_NAME}"
-        GTest::gtest_main
         "${project_namespace}::${COMPONENT_NAME}"
 )
-add_test(NAME "${TEST_NAME}" COMMAND "${TEST_NAME}")

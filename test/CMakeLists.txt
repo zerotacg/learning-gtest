@@ -1,12 +1,7 @@
-set(TEST_NAME "hello-world-test")
-
-add_executable("${TEST_NAME}"
+add_test_executable(hello-world-test
         hello-world.test.cpp
 )
-target_link_libraries("${TEST_NAME}"
-        GTest::gtest_main
+target_link_libraries(hello-world-test
         "${project_namespace}::hello"
         "${project_namespace}::world"
 )
-
-add_test(NAME "${TEST_NAME}" COMMAND "${TEST_NAME}")
