@@ -44,7 +44,18 @@
       "configurePreset": "default",
       "configuration": "Release",
       "output": {"outputOnFailure": true},
-      "execution": {"noTestsAction": "error", "stopOnFailure": true}
+      "execution": {"noTestsAction": "error", "stopOnFailure": true},
+      "environment": {
+        "GTEST_OUTPUT": "xml:${sourceDir}/build/${presetName}/reports/"
+      }
+    },
+    {
+      "inherits": ["default"],
+      "name": "ci",
+      "execution": {"noTestsAction": "error", "stopOnFailure": false},
+      "environment": {
+        "GTEST_OUTPUT": "xml:${sourceDir}/build/${presetName}/reports/"
+      }
     }
   ],
   "packagePresets": [

@@ -88,13 +88,13 @@ jobs:
       - name: Test
         run: |
           cmake --build --preset=default
-          ctest --extra-verbose --preset=default
+          ctest --extra-verbose --preset=ci
 
       - uses: actions/upload-artifact@v4
         if: success() || failure()
         with:
           name: test-results
-          path: "${{ needs.configure.outputs.build-output-dir }}/**/reports/junit-*.xml"
+          path: "${{ needs.configure.outputs.build-output-dir }}/**/reports/*.xml"
 
   package:
     runs-on: ubuntu-latest

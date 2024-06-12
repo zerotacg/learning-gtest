@@ -43,7 +43,4 @@ target_link_libraries("${TEST_NAME}"
         GTest::gtest_main
         "${project_namespace}::${COMPONENT_NAME}"
 )
-add_test(
-        NAME "${TEST_NAME}"
-        COMMAND "${TEST_NAME}" "--gtest_output=xml:${CMAKE_CURRENT_BINARY_DIR}/reports/junit-${TEST_NAME}.xml"
-)
+add_test(NAME "${TEST_NAME}" COMMAND "${TEST_NAME}")
