@@ -94,6 +94,7 @@ jobs:
         if: success() || failure()
         with:
           name: test-results
+          if-no-files-found: error
           path: "${{ needs.configure.outputs.build-output-dir }}/**/reports/*.xml"
 
   package:
