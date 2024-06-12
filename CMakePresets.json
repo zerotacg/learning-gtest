@@ -7,6 +7,14 @@
       "binaryDir": "${sourceDir}/build/${presetName}"
     },
     {
+      "inherits": ["default"],
+      "name": "default-coverage",
+      "cacheVariables": {
+        "CMAKE_C_FLAGS": "--coverage",
+        "CMAKE_CXX_FLAGS": "--coverage"
+      }
+    },
+    {
       "name": "hello",
       "inherits": ["default"]
     },
